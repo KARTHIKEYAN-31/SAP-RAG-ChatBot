@@ -1,0 +1,18 @@
+---
+applications:
+- name: RAG_api
+  random-route: true
+  path: ./
+  memory: 1000M
+  disk_quota: 1500M
+  instances: 1
+  buildpack: python_buildpack
+  command: uvicorn RAG_api:app --host 0.0.0.0 --port 8000 --reload
+  env:
+    FLASK_ENV: production
+    HF_TOKEN: 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
+    Hostname: 185732f0-e984-4228-bc32-7b8d3e738f72.hana.trial-us10.hanacloud.ondemand.com
+    Port: 433
+    Username: DBADMIN
+    Password: Karthi31@tvm
+    
