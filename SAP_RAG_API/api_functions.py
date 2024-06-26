@@ -8,18 +8,13 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferMemory
 from hdbcli import dbapi
 from langchain_community.document_loaders import PyPDFLoader
-# from langchain_community.document_loaders import UnstructuredPDFLoader
-# from langchain_community.document_loaders import PyPDFium2Loader
-# from langchain_community.document_loaders import PyMuPDFLoader
-# from langchain_community.document_loaders import PDFPlumberLoader
 from langchain_community.docstore.document import Document
 from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import CharacterTextSplitter
 import re
 
 
-
-
+#function to get hanaDB connection
 def get_hana_db_conn():
     conn = dbapi.connect(
             address=os.environ.get("Hostname"),
@@ -29,6 +24,7 @@ def get_hana_db_conn():
     )
     return conn
 
+#function to store file in temp dir and send temp file path
 def get_temp_file_path(file):
     temp_dir = tempfile.mkdtemp()
     # Save the uploaded PDF to the temporary directory
@@ -37,6 +33,7 @@ def get_temp_file_path(file):
         f.write(file.file.read())
     return path
 
+#function to process pdf, convert it as docs and return pages
 def get_text_from_pdf(file):
     loader = PyPDFLoader(file)
     pages = loader.load_and_split()
@@ -45,34 +42,21 @@ def get_text_from_pdf(file):
             page.page_content = decode(page.page_content)
     return pages
 
-# def get_text_from_pdf(file):
-#     loader = UnstructuredPDFLoader(file, mode="elements")
-#     pages = loader.load()
-#     return pages
-
-# def get_text_from_pdf(file):
-#     loader = PyPDFium2Loader(file)
-#     pages = loader.load()
-#     return pages
-
-# def get_text_from_pdf(file):
-#     loader = PDFPlumberLoader(file)
-#     pages = loader.load_and_split()
-#     return pages
-
+#function to process csv, convert it as docs and return pages
 def get_text_from_csv(file, key_column):
     df = pd.read_csv(file)
     loader = DataFrameLoader(data_frame=df, page_content_column=key_column)
     pages = loader.load()
     return pages
 
+#function to process txt, convert it as docs and return pages
 def get_text_from_txt(file):
     text_documents = TextLoader(file).load()
     text_splitter = CharacterTextSplitter(chunk_size=250, chunk_overlap=20)
     text_chunks = text_splitter.split_documents(text_documents)
     return text_chunks
 
-
+#function to create llm-chain and return it
 def get_llm_chain(llm, db, file_name):
 
     # set the prompt templte
@@ -101,7 +85,7 @@ def get_llm_chain(llm, db, file_name):
     )
     return qa_chain
 
-
+#function to extract answer from string
 def extract_between_colon_and_period(input_string):
     try:
         start_index = input_string.index('Answer:') + len('Answer:')
@@ -115,16 +99,12 @@ def extract_between_colon_and_period(input_string):
         return None
     
 
-
-#You are an assistant. You need to answer the question briefly without mentioning the context.
-#Don't answer the question if there is no context or no relevent content in the context. Answer the questions only based on the context. 
-
-
-
+#function to convert cid to char to decode the encoded pdf pages
 def cidToChar(cidx):
     return chr(int(re.findall(r'\/g(\d+)',cidx)[0]) + 29)
 
 
+#function to decode the encoded pdf pages
 def decode(sentence):
   sen = ''
   for x in sentence.split('\n'):

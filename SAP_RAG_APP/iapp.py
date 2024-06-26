@@ -2,11 +2,7 @@ import streamlit as st
 import functions as func
 
 
-
-@st.experimental_fragment
-def clear_chat():
-    st.session_state.messages = []
-
+#function to chat
 @st.experimental_fragment
 def init_chat():
     st.chat_message("user").markdown(prompt)
@@ -23,46 +19,23 @@ def init_chat():
     st.session_state.messages.append({"role": "assistant", "content": ans})
 
 
-
+# set page config
 st.set_page_config(
     page_title="Chat-Bot",
     page_icon="🤖",
     layout="wide",
 )
 
-# st.write("""<p style='text-align: center;
-#           font-size: 20px;
-#           font-weight: bold;
-#           position: fixed;
-#           top: 0;
-#           left: 25%;
-#           background-color: #0e1117;'>CHAT WITH DATA</p>""", unsafe_allow_html=True)
- 
 
+# declare session state variables to store chat history 
 if "messages" not in st.session_state:
     st.session_state.messages = []
-if "file_name" not in st.session_state:
-    st.session_state.file_name = ""
 
 
-# st.markdown(
-#     """<style>
-#         .element-container:nth-of-type(2) button {
-#             height: 0.5em;
-#             position: fixed;
-#             bottom: 7em;
-#         }
-#         </style>""",
-#     unsafe_allow_html=True,
-# )
-# st.write("Chat with Data")
-
-
-# if st.button("Clear Chat"):
-#     clear_chat()
-
-
+#set chat with all data and initiate chat
 all_doc = True
+
+#load chat history
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
