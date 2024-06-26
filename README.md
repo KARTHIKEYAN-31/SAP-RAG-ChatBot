@@ -45,27 +45,27 @@ It contains the libraries required to run the
 
 - To convert the file into vectors and upload it into the SAP HANA Vector DB, select File upload in Dropdown > upload document using Browse File. Once the document uploaded "Success" message appears and chat option is enabled.
 
-![app.py - upload Data](Screenshots\detailed_app_upload_data.PNG "app.py - upload Data")
+![app.py - upload Data](Screenshots/detailed_app_upload_data.PNG "app.py - upload Data")
 
 - Select "Chat with Pre-Uploaded Data" from dropdown to chat withe the docs already uploaded into the DB. By default a "all document" toggle is dis selected to chat with a particular docs.
 
-![app.py - Pre_uploaded Data - select Docs](Screenshots\detailed_app_preuploaded_doc_select_doc.PNG "app.py - Pre_uploaded Data - select Docs")
+![app.py - Pre_uploaded Data - select Docs](Screenshots/detailed_app_preuploaded_doc_select_doc.PNG "app.py - Pre_uploaded Data - select Docs")
 
 - To chat with all docs without selecting a particular data, select "all document" toggle.
 
-![app.py - Pre_uploaded Data - select Docs](Screenshots\detailed_app_preuploaded_doc_all_doc.PNG "app.py - Pre_uploaded Data - select Docs")
+![app.py - Pre_uploaded Data - select Docs](Screenshots/detailed_app_preuploaded_doc_all_doc.PNG "app.py - Pre_uploaded Data - select Docs")
 
 #### iapp.py
 
 This is a simple chat UI to chat with all the docs in the hana DB. 
 
-![iapp.py - simple chat](Screenshots\iapp_ss.PNG "iapp.py - simple chat")
+![iapp.py - simple chat](Screenshots/iapp_ss.PNG "iapp.py - simple chat")
 
 It can be integrate with any application using iframe.
 
-![chat widget](Screenshots\Chatbot_html2_ss.PNG "chat widget")
+![chat widget](Screenshots/Chatbot_html2_ss.PNG "chat widget")
 
-![chat widget](Screenshots\Chatbot_html_ss.PNG "chat widget")
+![chat widget](Screenshots/Chatbot_html_ss.PNG "chat widget")
 
 ### Clone and try it:
 
