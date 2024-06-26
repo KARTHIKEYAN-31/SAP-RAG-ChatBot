@@ -78,6 +78,8 @@ It can be integrate with any application using iframe.
 - Install required libraries
     
         pip install -r requirements.txt
+  
+- set the environment variables like hugging face api, hana DB credientials.
 
 - Run api locally by the following command
 
