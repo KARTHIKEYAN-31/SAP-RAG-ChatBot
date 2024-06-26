@@ -31,7 +31,7 @@ It contains the libraries required to run the
 
 ### Architecture:
 
-![Architecture](Screenshots\Architecture.PNG "Architecture of the APP")
+![Architecture](Screenshots/Architecture.PNG "Architecture of the APP")
 
 - To upload a document to the HANA DB, run app.py > select upload docs from dropdown in sidebar > browse and upload document > chat once "success" message appeared. Upload api is called from app.py where the api gets the file, categorize it, extract pages, convert into vector using embedding llm, and load it into the HANA DB.
 
